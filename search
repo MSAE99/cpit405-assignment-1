@@ -1,0 +1,25 @@
+<html>
+
+  <head>
+    <h1>PICs</h1>
+
+  </head>
+  <nav>
+    <li> <a href=home.html>Back to home page
+      </a>
+    </li>
+  </nav>
+
+  <body style="background-color:lightgray;">
+
+
+    <h1>Search</h1>
+    <input type="text" placeholder="What are you looking for?">
+    <button type="submit">
+    </button>
+    <br>
+    <br>
+
+  </body>
+
+</html>
