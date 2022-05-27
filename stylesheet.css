@@ -1,3 +1,8 @@
+
+html {
+    style ="background-color:gray;"
+}
+
 h1 {
   font-family: Serif , "Times new roman";
   padding: 10px;
@@ -34,3 +39,9 @@ p {
   font-weight: 1000;
   color: white;
 }
+.imgs {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
