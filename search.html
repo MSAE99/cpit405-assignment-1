@@ -1,29 +1,107 @@
-<html>
-
-  <head>
+<!DOCTYPE html>
+<html lang="en" style ="background-color:gray;">
+<head>
+    <meta charset="UTF-8">
+   
     <link rel="stylesheet" href="stylesheet.css">
-     
+</head>
+<body>
+    <div class="wrapper">
 
-    </head>
-    <h1>PICs</h1>
-
-  
-  <nav>
-    <li> <a href=index>Back to home page
-      </a>
-    </li>
-  </nav>
-
-  <body style="background-color:gray;">
+        <h1>PICs</h1>
 
 
-    <h1>Search</h1>
-    <input type="text" placeholder="What are you looking for?">
-    <button type="submit">
-    </button>
-    <br>
-    <br>
+        <nav>
+            <ul>
+                <li>
+                    <a href=index.html>
+                        Back to home page
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-  </body>
 
+
+
+
+        <h3>Search Form</h3>
+        <form id="form" action="#">
+            <div>
+                <input type="text" class="form-element" name="image-name" placeholder="Search for images" id="image-name" required>
+            </div>
+            <br>
+            <div>
+                <label for="types-ul">Image type:</label>
+                <ul id="types-ul">
+                    <li class="d-inline">
+                        <input type="checkbox" id="types-png" name="types[]" value="png" checked>
+                        <label for="types-png">PNG</label>
+                    </li>
+                    <li class="d-inline">
+                        <input type="checkbox" id="types-gif" name="types[]" value="gif" checked>
+                        <label for="types-gif">GIF</label>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+            <br>
+            <div>
+                <button id="sb" type="submit">Search</button>
+            </div>
+        </form>
+        <div class="img" id="imagesr">
+
+
+        </div>
+
+    </div>
+    <script>
+        let images = [];
+       
+        class Image {
+            constructor(src, alt, id, uploadDate) {
+                this.src = src;
+                this.alt = alt;
+                this.id = id;
+                this.uploadDate = uploadDate
+            }
+        }
+      
+        function makeImages(item) {
+            var image = document.getElementById('img' + item.id);
+            images.push(new Image(image.src, image.alt, item.id, item.innerHTML))
+        }
+        
+        function writeImages() {
+            let imagesRow = document.getElementById('imagesr');
+            imagesRow.innerHTML = "";
+            images.forEach(function (image) {
+                imagesRow.innerHTML += " <div class=\"imgs\" >" +
+                    "                    <img id=\"img" + image.id + "\" src=\"" + image.src + "\" alt=\"" + image.alt + "\">" +
+                    "                    <span id=\"" + image.id + "\" class=\"upload-date\">" + image.uploadDate + "</span>" +
+                    "                </div>"
+            })
+
+
+        }
+        var srh = document.getElementById("image-name").value;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('get', 'http://api.giphy.com/v1/gifs/search?q=cat&api_key=GKidg24RAT4p0RwsqxKsxF76H3B8PHNx');
+            xhr.send();
+            xhr.onload = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let res = JSON.parse(xhr.response);
+                    res.data.forEach(function (v, i) {
+                        images.push(new Image(v.images.downsized_medium.url, v.title, v.id, v.trending_datetime))
+                    })
+                    writeImages()
+                }
+            }
+        ;
+    </script>
+</body>
 </html>
