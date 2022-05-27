@@ -90,7 +90,7 @@
         var srh = document.getElementById("image-name").value;
 
             let xhr = new XMLHttpRequest();
-            xhr.open('get', 'http://api.giphy.com/v1/gifs/search?q=cat&api_key=GKidg24RAT4p0RwsqxKsxF76H3B8PHNx');
+            xhr.open('get', 'https://api.giphy.com/v1/gifs/search?q=cat&api_key=GKidg24RAT4p0RwsqxKsxF76H3B8PHNx');
             xhr.send();
             xhr.onload = function () {
                 if (this.readyState === 4 && this.status === 200) {
